@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scroll-bar {
+  scrollbar-width: thin;
+  scrollbar-color: #d1d5db #f8fafc;
+}
+
+/* Estilos para motores WebKit con redondeo */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e2e8f0; /* Color de fondo de la barra */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #94a3b8; /* Color de la barra */
+  border-radius: 12px; /* Redondeo de la barra */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #64748b; /* Color de la barra al pasar el cursor */
+}
