@@ -1,6 +1,11 @@
-const Product = () => {
+import Navbar from "../components/Navbar"
+
+const Product = ({ isLogin }: { isLogin: boolean }) => {
+
   return (
-    <div>Product</div>
+    <main>
+      <Navbar isLogin={isLogin} />
+    </main>
   )
 }
 

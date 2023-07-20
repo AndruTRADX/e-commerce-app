@@ -1,18 +1,20 @@
-import { useState } from 'react'
 import { Disclosure, Transition } from '@headlessui/react'
-import { ChevronRightIcon, ArrowLeftOnRectangleIcon, UserIcon } from '@heroicons/react/24/outline'
+import {
+  ChevronRightIcon,
+  ArrowLeftOnRectangleIcon,
+  UserIcon,
+} from '@heroicons/react/24/outline'
 import {
   asideLeftBrandsList,
   asideLeftCategoryList,
   asideLeftPriceList,
 } from '../constants'
 
-const AsideLeft = () => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isLogin, _setIsLogin] = useState<boolean>(false)
+const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
+  
 
   return (
-    <div className="w-[320px] min-h-full mt-8 mr-2">
+    <div className="w-[320px] min-h-full mt-8 mr-2 hidden xs:block">
       <div className="border rounded-lg p-4">
         <Disclosure>
           {({ open }) => (
@@ -24,7 +26,7 @@ const AsideLeft = () => {
               >
                 <p>Category</p>
                 <ChevronRightIcon
-                  className={`w-5 h-5 text-slate-800 ${
+                  className={`w-5 h-5 text-slate-700 ${
                     open ? 'rotate-90 transform' : ''
                   }`}
                 />
@@ -63,7 +65,7 @@ const AsideLeft = () => {
               >
                 <p>Brands</p>
                 <ChevronRightIcon
-                  className={`w-5 h-5 text-slate-800 ${
+                  className={`w-5 h-5 text-slate-700 ${
                     open ? 'rotate-90 transform' : ''
                   }`}
                 />
@@ -102,7 +104,7 @@ const AsideLeft = () => {
               >
                 <p>Price</p>
                 <ChevronRightIcon
-                  className={`w-5 h-5 text-slate-800 ${
+                  className={`w-5 h-5 text-slate-700 ${
                     open ? 'rotate-90 transform' : ''
                   }`}
                 />
@@ -133,14 +135,14 @@ const AsideLeft = () => {
 
         <hr />
         {isLogin ? (
-          <div className="flex items-center">
-            <ArrowLeftOnRectangleIcon className="w-5 h-5 text-slate-800" />
-            <p className="text-slate-800 font-semibold">Log Out</p>
-          </div>
-        ): (
           <div className="flex items-center p-2 mt-2 gap-2 hover:bg-slate-100 cursor-pointer rounded-lg">
-            <UserIcon className="w-5 h-5 text-slate-800" />
-            <p className="text-slate-800 font-semibold">Login</p>
+            <ArrowLeftOnRectangleIcon className="w-5 h-5 text-slate-700" />
+            <p className="text-slate-700 font-semibold">Log Out</p>
+          </div>
+        ) : (
+          <div className="flex items-center p-2 mt-2 gap-2 hover:bg-slate-100 cursor-pointer rounded-lg">
+            <UserIcon className="w-5 h-5 text-slate-700" />
+            <p className="text-slate-700 font-semibold">Login</p>
           </div>
         )}
       </div>

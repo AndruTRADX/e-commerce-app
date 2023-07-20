@@ -12,6 +12,12 @@
   @apply flex w-full p-2 mb-2 items-center rounded-lg font-semibold text-slate-700;
 }
 
+/* Login */
+.login-input {
+  @apply outline-0 bg-slate-50 rounded-lg font-normal py-3 pr-4 pl-11 text-sm border border-slate-300 text-gray-800 placeholder:text-slate-400 w-full;
+}
+
+
 .scroll-bar {
   scrollbar-width: thin;
   scrollbar-color: #d1d5db #f8fafc;

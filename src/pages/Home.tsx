@@ -1,13 +1,15 @@
-import ProductList from '../common/ProductList'
+import ProductList from '../components/ProductList'
 import AsideLeft from '../components/AsideLeft'
 import Navbar from '../components/Navbar'
 
-const Home = () => {
+const Home = ({ isLogin }: { isLogin: boolean }) => {
+
   return (
+    
     <div className="w-full min-h-screen flex flex-col items-center px-8">
-      <Navbar />
+      <Navbar isLogin={isLogin} />
       <div className="w-full flex flex-grow min-h-full max-w-screen-xl">
-        <AsideLeft />
+        <AsideLeft isLogin={isLogin} />
         <ProductList />
       </div>
     </div>
