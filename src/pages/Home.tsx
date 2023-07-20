@@ -5,14 +5,13 @@ import Navbar from '../components/Navbar'
 const Home = ({ isLogin }: { isLogin: boolean }) => {
 
   return (
-    
-    <div className="w-full min-h-screen flex flex-col items-center px-8">
+    <main className="w-full min-h-screen flex flex-col items-center px-8">
       <Navbar isLogin={isLogin} />
       <div className="w-full flex flex-grow min-h-full max-w-screen-xl">
         <AsideLeft isLogin={isLogin} />
         <ProductList />
       </div>
-    </div>
+    </main>
   )
 }
 
