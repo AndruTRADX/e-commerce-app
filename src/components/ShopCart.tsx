@@ -5,24 +5,20 @@ import ProductShopCart from './ProductShopCart'
 
 const products = [
   {
-    id: 'hisduabdsak',
+    _id: 'hisduabdsak',
     name: 'Nintendo Switch',
     description: 'Very cool Nintendo console',
     image: 'https://picsum.photos/400/400/',
     price: 299,
     stock: 5,
-    category: '64b5b1adde53eeff0026b0fd',
-    brand: '64b5b219de53eeff0026b100',
   },
   {
-    id: 'nasbdhkasdbhk',
+    _id: 'nasbdhkasdbhk',
     name: 'Nintendo Switch',
     description: 'Very cool Nintendo console',
     image: 'https://picsum.photos/400/400/',
     price: 299,
     stock: 5,
-    category: '64b5b1adde53eeff0026b0fd',
-    brand: '64b5b219de53eeff0026b100',
   },
 ]
 
@@ -88,6 +84,7 @@ const ShopCart = ({ open, setOpen }: Props) => {
                               <ProductShopCart
                                 product={product}
                                 index={index}
+                                key={`products-shop-cart-${product.name}/${index}`}
                               />
                             ))}
                           </ul>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   BuildingOffice2Icon,
   MinusSmallIcon,
@@ -8,56 +8,68 @@ import {
 import Navbar from '../components/Navbar'
 import LazyImage from '../common/LazyImage'
 import { useParams } from 'react-router-dom'
+import { ProductType } from '../types'
+import axios from 'axios'
+import { endpoints } from '../libs/endpoints'
 
 const Product = ({ isLogin }: { isLogin: boolean }) => {
-  const { id } = useParams();
+  const { id } = useParams()
   const [quantity, setQuantity] = useState<number>(1)
+  const [product, setProduct] = useState<ProductType>()
 
-  const handlerQuantity = (more: boolean) => {
-    if (more) {
+  const handlerQuantity = (more: 'more' | 'less') => {
+    if (more === 'more') {
       setQuantity((prev) => prev + 1)
-    } else if (more === false) {
+    } else if (more === 'less') {
       if (quantity > 1) {
         setQuantity((prev) => prev - 1)
       }
     }
   }
 
-  console.log(id);
+  useEffect(() => {
+    const getProduct = async () => {
+      const res = await axios.get(endpoints.getOneProduct(id || ''))
+      setProduct(res.data as ProductType)
+    }
+
+    void getProduct()
+  }, [id])
 
   return (
     <div className="w-full min-h-screen flex flex-col items-center px-8">
       <Navbar isLogin={isLogin} />
       <div className="w-full flex items-center md:items-stretch flex-col-reverse md:flex-row flex-grow min-h-full max-w-screen-xl">
         <div className="flex flex-[0.5] py-12 md:mr-6">
-          <LazyImage
-            src="https://picsum.photos/600/600/"
-            className="rounded-3xl object-cover"
-          />
+          <div className="w-full h-min flex justify-center items-center border border-slate-300 p-4 rounded-lg">
+            <LazyImage
+              src={product?.image || ''}
+              className="w-full h-full object-contain rounded-md"
+            />
+          </div>
         </div>
 
         <div className="flex flex-col gap-y-6 flex-[0.5] py-12">
           <h2 className="font-bold text-2xl text-slate-700 capitalize">
-            nintendo switch
+            {product?.name || ''}
           </h2>
           <p className="font-normal text-base text-slate-500">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
+            {product?.description || ''}
           </p>
 
-          <h2 className="font-bold text-2xl text-slate-700">$299</h2>
+          <h2 className="font-bold text-2xl text-slate-700">${product?.price || ''}</h2>
 
           <hr className="" />
 
           <div className="flex w-full justify-between items-center gap-4">
+            {product?.brand?.name && (
+              <div className="flex justify-between items-center gap-2 font-semibold text-base text-slate-700 capitalize">
+                <BuildingOffice2Icon className="w-5 h-5" />
+                {product?.brand?.name || ''}
+              </div>
+            )}
             <div className="flex justify-between items-center gap-2 font-semibold text-base text-slate-700 capitalize">
-              <BuildingOffice2Icon className="w-5 h-5" />
-              nintendo
-            </div>
-            <div className="flex justify-between items-center gap-2 font-semibold text-base text-slate-700 capitalize">
-              <TagIcon className="w-5 h-5" /> video games
+              <TagIcon className="w-5 h-5" /> {product?.category?.name || ''}
             </div>
           </div>
 
@@ -67,12 +79,12 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
             <div className="flex justify-evenly items-center font-semibold text-slate-700 border border-slate-300 rounded-lg py-2.5 px-4 select-none gap-2">
               <MinusSmallIcon
                 className="w-5 h-5 text-slate-500 cursor-pointer"
-                onClick={() => handlerQuantity(false)}
+                onClick={() => handlerQuantity('less')}
               />
               {quantity}
               <PlusSmallIcon
                 className="w-5 h-5 text-slate-500 cursor-pointer"
-                onClick={() => handlerQuantity(true)}
+                onClick={() => handlerQuantity('more')}
               />
             </div>
 

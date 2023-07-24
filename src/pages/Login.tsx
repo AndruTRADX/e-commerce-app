@@ -4,11 +4,11 @@ import {
   UserIcon,
 } from '@heroicons/react/24/outline'
 import { useState } from 'react'
-import devmarketLogo from '../../public/devmarket-logo.png'
+import devmarketLogo from '../assets/devmarket-logo.png'
 import LazyImage from '../common/LazyImage'
 
-const Login = () => {
-  const [haveAcount, sethaveAcount] = useState(true)
+const Login = ({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boolean>> }) => {
+  const [haveAcount, sethaveAcount] = useState<boolean>(true)
 
   return (
     <main className="flex justify-between min-h-screen">
@@ -67,6 +67,7 @@ const Login = () => {
             <button
               type="submit"
               className="w-full bg-slate-700 py-3 rounded-lg mt-4 text-white font-semibold hover:bg-slate-800"
+              onClick={() => setLogin(true)}
             >
               {haveAcount ? 'Login' : 'Sign Up'}
             </button>
@@ -77,7 +78,7 @@ const Login = () => {
               {haveAcount
                 ? 'Don´t you have an account?'
                 : 'Do you already have an account?'}{' '}
-              <span className="font-semibold text-slate-700 cursor-pointer" onClick={() => sethaveAcount(prev => !prev)}>
+              <span className="font-semibold text-secondary cursor-pointer hover:text-secondary/75" onClick={() => sethaveAcount(prev => !prev)}>
                 {haveAcount ? 'Sign Up' : 'Sign In'}
               </span>
             </p>

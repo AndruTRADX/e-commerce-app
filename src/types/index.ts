@@ -1,10 +1,10 @@
 export interface ProductType {
-  id: string
+  _id: string
   name: string
   description: string
   image: string
   price: number
   stock: number
-  category: string
-  brand: string
+  category?: { name: string }
+  brand?: { name: string }
 }

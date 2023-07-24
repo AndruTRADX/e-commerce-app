@@ -8,8 +8,7 @@ import Login from './pages/Login'
 import Product from './pages/Product'
 
 function App() {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [isLogin, _setIsLogin] = useState<boolean>(true)
+  const [isLogin, setIsLogin] = useState<boolean>(false)
 
   return (
     <>
@@ -19,7 +18,7 @@ function App() {
         <Route path='/product/:id' element={<Product isLogin={isLogin} />} />
         <Route path='/category/:id' element={<SearchByCategory />} />
         <Route path='/brand/:id' element={<SearchByBrand/>} />
-        <Route path='/login' element={<Login/>} />
+        <Route path='/login' element={<Login setLogin={setIsLogin} />} />
       </Routes>
     </>
   )

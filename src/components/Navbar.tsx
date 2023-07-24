@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/24/outline'
 import ShopCart from './ShopCart'
 import LazyImage from '../common/LazyImage'
-import devMarket from '../../public/devmarket-icon.svg'
+import devMarket from '../assets/devmarket-icon.svg'
 
 const Navbar = ({ isLogin }: { isLogin: boolean }) => {
   const [openShopCart, setOpenShopCart] = useState(false)

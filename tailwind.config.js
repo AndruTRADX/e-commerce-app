@@ -10,7 +10,8 @@ export default {
         'xs': '569px',
       },
       colors: {
-        'primary': '#282634'
+        'primary': '#282634',
+        'secondary': '#FF4057'
       }
     },
   },

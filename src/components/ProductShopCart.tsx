@@ -9,7 +9,7 @@ const ProductShopCart = ({
   index: number
 }) => {
   return (
-    <li className="flex py-6" key={`product-shop-card-${product.id}-${index}`}>
+    <li className="flex py-6" key={`product-shop-card-${product._id}-${index}`}>
       <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-slate-200">
         <LazyImage
           src={product.image}
