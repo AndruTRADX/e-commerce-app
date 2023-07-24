@@ -71,7 +71,7 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
                     key={`aside-left-${item.name}-${index}`}
                   >
                     <span className="m-2" />{' '}
-                    <Link to={`category/${item._id}`} className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize">
+                    <Link to={`/category/${item._id}`} className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize">
                       {item.name}
                     </Link>
                   </Disclosure.Panel>
@@ -110,7 +110,7 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
                     key={`aside-left-${item.name}-${index}`}
                   >
                     <span className="m-2" />{' '}
-                    <Link to={`brand/${item._id}`} className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize">
+                    <Link to={`/brand/${item._id}`} className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize">
                       {item.name}
                     </Link>
                   </Disclosure.Panel>
@@ -166,10 +166,10 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
             <p className="text-slate-700 font-semibold">Log Out</p>
           </div>
         ) : (
-          <div className="flex items-center p-2 mt-2 gap-2 hover:bg-slate-100 cursor-pointer rounded-lg">
+          <Link to="/login" className="flex items-center p-2 mt-2 gap-2 hover:bg-slate-100 cursor-pointer rounded-lg">
             <UserIcon className="w-5 h-5 text-slate-700" />
             <p className="text-slate-700 font-semibold">Login</p>
-          </div>
+          </Link>
         )}
       </div>
     </div>

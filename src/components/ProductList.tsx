@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useEffect, useState } from 'react'
 import ProductCard from './ProductCard'
 import axios from 'axios'
@@ -12,8 +11,7 @@ const ProductList = () => {
     const getProducts = async () => {
       try {
         const res = await axios.get(endpoints.getProducts);
-        const productsData: ProductType[] = res.data;
-        setProducts(productsData);
+        setProducts(res.data as ProductType[]);
       } catch (error) {
         console.error('Error fetching products:', error);
       }

@@ -6,7 +6,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   return (
     <Link
       className="flex flex-col w-full relative border border-slate-300 justify-between rounded-lg p-4 transition-[box-shadow] hover:shadow-lg hover:shadow-slate-300/50"
-      to={`product/${product._id}`}
+      to={`/product/${product._id}`}
     >
       {/* <span className="absolute top-3 left-3 bg-rose-700 rounded text-sm py-[2px] px-[9px] font-semibold text-white">
         Sale
