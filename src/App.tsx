@@ -7,6 +7,7 @@ import SearchByBrand from './pages/SearchByBrand'
 import Login from './pages/Login'
 import Product from './pages/Product'
 import { useAuth } from './hooks/useAuth'
+import Profile from './pages/Profile'
 
 function App() {
   const [isLogin, setIsLogin] = useState<boolean>(false)
@@ -40,6 +41,12 @@ function App() {
           path="/login"
           element={
             isLogin ? <Navigate to="/" /> : <Login setLogin={setIsLogin} />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            isLogin ? <Profile isLogin={isLogin} setLogin={setIsLogin} /> : <Navigate to="/" />
           }
         />
       </Routes>

@@ -36,12 +36,15 @@ const AsideLeft = ({
 
   useEffect(() => {
     const getProduct = async () => {
-      const resCategories = await axios.get(endpoints.getCategories)
+      try {
+        const resCategories = await axios.get(endpoints.getCategories)
+        const resBrands = await axios.get(endpoints.getBrands)
 
-      const resBrands = await axios.get(endpoints.getBrands)
-
-      setBrands(resBrands.data as BrandType[])
-      setCategories(resCategories.data as CategoryType[])
+        setBrands(resBrands.data as BrandType[])
+        setCategories(resCategories.data as CategoryType[])
+      } catch (error) {
+        console.log('Error to get brands or categories', error)
+      }
     }
 
     void getProduct()

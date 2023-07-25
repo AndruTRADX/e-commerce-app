@@ -7,6 +7,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
     <Link
       className="flex flex-col w-full relative border border-slate-200 justify-between rounded-lg p-4 transition-[box-shadow] hover:shadow-xl hover:shadow-slate-200/50"
       to={`/product/${product._id}`}
+      onClick={() => window.scrollTo(0, 0)}
     >
       {/* <span className="absolute top-3 left-3 bg-rose-700 rounded text-sm py-[2px] px-[9px] font-semibold text-white">
         Sale

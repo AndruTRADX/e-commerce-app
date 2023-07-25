@@ -33,7 +33,7 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
             onClick={() => window.scrollTo(0, 0)}
             className="flex justify-between items-center font-semibold text-2xl text-slate-700 cursor-pointer"
           >
-            <h2>DevMarket</h2>
+            <h2 className="hidden xs:block">DevMarket</h2>
             <LazyImage
               className="w-10 h-10 text-slate-700 object-cover"
               src={devMarket}
