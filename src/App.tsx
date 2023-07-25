@@ -14,7 +14,7 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home isLogin={isLogin} />} />
-        <Route path="/search/:id" element={<SearchProducts />} />
+        <Route path="/search/:query" element={<SearchProducts isLogin={isLogin} />} />
         <Route path="/product/:id" element={<Product isLogin={isLogin} />} />
         <Route
           path="/category/:id"

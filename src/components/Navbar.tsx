@@ -9,9 +9,20 @@ import {
 import ShopCart from './ShopCart'
 import LazyImage from '../common/LazyImage'
 import devMarket from '../assets/devmarket-icon.svg'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = ({ isLogin }: { isLogin: boolean }) => {
   const [openShopCart, setOpenShopCart] = useState(false)
+  const navigate = useNavigate()
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const target = e.target as typeof e.target & {
+      search: { value: string }
+    }
+    const search = target.search.value
+    navigate(`/search/${search}`)
+  }
 
   return (
     <>
@@ -45,15 +56,20 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
             ))}
           </ul>
 
-          <div className="flex justify-between items-center gap-2">
+          <form
+            onSubmit={(e) => handleSubmit(e)}
+            className="flex justify-between items-center gap-2"
+          >
             <div className="relative hidden xs:block">
               <input
+                type="text"
+                name="search"
                 placeholder={'Search'}
                 className="navbar_search-input w-full"
               />
-              <span>
+              <button type="submit">
                 <MagnifyingGlassIcon className="w-6 h-6 absolute top-2 left-3 text-slate-400" />
-              </span>
+              </button>
             </div>
 
             {isLogin && (
@@ -71,7 +87,7 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
             >
               <UserIcon className="w-5 h-5 absolute text-slate-700" />
             </Link>
-          </div>
+          </form>
         </div>
       </nav>
 

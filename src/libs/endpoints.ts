@@ -19,4 +19,7 @@ export const endpoints = {
   getProductsByBrandId(id: string) {
     return `${API}/products/brand/${id}`
   },
+  getProductsByQuery(query: string) {
+    return `${API}/products/search/${query}`
+  },
 }
