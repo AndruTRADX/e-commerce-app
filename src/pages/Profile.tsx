@@ -37,7 +37,7 @@ const Profile = ({
             <button
               className="flex items-center py-2.5 px-3.5 h-min border border-slate-200 mt-2 gap-2 hover:bg-slate-50 cursor-pointer rounded-lg"
               onClick={() => {
-                auth?.signOut
+                auth?.signOut()
                 setLogin(false)
               }}
             >
