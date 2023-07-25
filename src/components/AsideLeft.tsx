@@ -29,7 +29,7 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
   useEffect(() => {
     const getProduct = async () => {
       const resCategories = await axios.get(endpoints.getCategories)
-      
+
       const resBrands = await axios.get(endpoints.getBrands)
 
       setBrands(resBrands.data as BrandType[])
@@ -40,8 +40,8 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
   }, [])
 
   return (
-    <div className="w-[320px] min-h-full mt-8 mr-2 hidden xs:block">
-      <div className="border rounded-lg p-4">
+    <aside className="md:w-[260px] xs:w-[220px] h-screen pb-[116px] mt-8 mr-2 hidden xs:block fixed overflow-y-auto">
+      <div className="border border-slate-200 rounded-lg p-4">
         <Disclosure>
           {({ open }) => (
             <>
@@ -71,7 +71,10 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
                     key={`aside-left-${item.name}-${index}`}
                   >
                     <span className="m-2" />{' '}
-                    <Link to={`/category/${item._id}`} className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize">
+                    <Link
+                      to={`/category/${item._id}`}
+                      className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize"
+                    >
                       {item.name}
                     </Link>
                   </Disclosure.Panel>
@@ -110,7 +113,10 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
                     key={`aside-left-${item.name}-${index}`}
                   >
                     <span className="m-2" />{' '}
-                    <Link to={`/brand/${item._id}`} className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize">
+                    <Link
+                      to={`/brand/${item._id}`}
+                      className="aside_left-div hover:bg-slate-100 cursor-pointer text-start capitalize"
+                    >
                       {item.name}
                     </Link>
                   </Disclosure.Panel>
@@ -159,20 +165,23 @@ const AsideLeft = ({ isLogin }: { isLogin: boolean }) => {
           )}
         </Disclosure>
 
-        <hr />
+        <hr className="border-slate-200" />
         {isLogin ? (
           <div className="flex items-center p-2 mt-2 gap-2 hover:bg-slate-100 cursor-pointer rounded-lg">
             <ArrowLeftOnRectangleIcon className="w-5 h-5 text-slate-700" />
             <p className="text-slate-700 font-semibold">Log Out</p>
           </div>
         ) : (
-          <Link to="/login" className="flex items-center p-2 mt-2 gap-2 hover:bg-slate-100 cursor-pointer rounded-lg">
+          <Link
+            to="/login"
+            className="flex items-center p-2 mt-2 gap-2 hover:bg-slate-100 cursor-pointer rounded-lg"
+          >
             <UserIcon className="w-5 h-5 text-slate-700" />
             <p className="text-slate-700 font-semibold">Login</p>
           </Link>
         )}
       </div>
-    </div>
+    </aside>
   )
 }
 

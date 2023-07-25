@@ -25,10 +25,10 @@ const SearchProduct = ({ isLogin }: { isLogin: boolean }) => {
   }, [searchQuery]);
 
   return (
-    <article className="w-full min-h-screen flex flex-col items-center px-8">
+    <main className="w-full min-h-screen flex flex-col items-center px-8">
       <Navbar isLogin={isLogin} />
       <div className="w-full flex flex-grow min-h-full max-w-screen-xl">
-        <article className="w-full min-h-full flex justify-center items-start my-8 xs:ml-4">
+        <article className="w-full min-h-full flex justify-center items-start my-8">
           <div className="w-full grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
             {products.map((product) => (
               <ProductCard key={product._id} product={product} />
@@ -36,7 +36,7 @@ const SearchProduct = ({ isLogin }: { isLogin: boolean }) => {
           </div>
         </article>
       </div>
-    </article>
+    </main>
   )
 }
 

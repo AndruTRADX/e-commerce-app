@@ -41,7 +41,7 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
       <Navbar isLogin={isLogin} />
       <div className="w-full flex items-center md:items-stretch flex-col-reverse md:flex-row flex-grow min-h-full max-w-screen-xl">
         <div className="flex flex-[0.5] py-12 md:mr-6">
-          <div className="w-full h-min flex justify-center items-center border border-slate-300 p-4 rounded-lg">
+          <div className="w-full h-min flex justify-center items-center border border-slate-200 p-4 rounded-lg">
             <LazyImage
               src={product?.image || ''}
               className="w-full h-full object-contain rounded-md"
@@ -59,7 +59,7 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
 
           <h2 className="font-bold text-2xl text-slate-700">${product?.price || ''}</h2>
 
-          <hr className="" />
+          <hr className="border-slate-200" />
 
           <div className="flex w-full justify-between items-center gap-4">
             {product?.brand?.name && (
@@ -73,7 +73,7 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
             </div>
           </div>
 
-          <hr className="" />
+          <hr className="border-slate-200" />
 
           <div className="flex w-full gap-4">
             <div className="flex justify-evenly items-center font-semibold text-slate-700 border border-slate-300 rounded-lg py-2.5 px-4 select-none gap-2">
