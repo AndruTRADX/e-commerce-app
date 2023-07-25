@@ -74,6 +74,7 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
 
             {isLogin && (
               <button
+                type="button"
                 className="rounded-lg flex justify-center items-center w-10 h-10 hover:bg-slate-100"
                 onClick={() => setOpenShopCart((prev) => !prev)}
               >
@@ -82,7 +83,7 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
             )}
 
             <Link
-              to={isLogin ? '' : '/login'}
+              to={isLogin ? '/profile' : '/login'}
               className="rounded-lg flex justify-center items-center w-10 h-10 hover:bg-slate-100"
             >
               <UserIcon className="w-5 h-5 absolute text-slate-700" />

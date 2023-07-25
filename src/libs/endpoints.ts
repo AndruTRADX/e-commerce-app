@@ -22,4 +22,9 @@ export const endpoints = {
   getProductsByQuery(query: string) {
     return `${API}/products/search/${query}`
   },
+  auth: {
+    signIn: `${API}/auth/login`,
+    validate: `${API}/auth/profile`,
+    signUp: `${API}/users/`
+  }
 }

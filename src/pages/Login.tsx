@@ -6,14 +6,53 @@ import {
 import { useState } from 'react'
 import devmarketLogo from '../assets/devmarket-logo.png'
 import LazyImage from '../common/LazyImage'
+import { useAuth } from '../hooks/useAuth'
 
-const Login = ({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const Login = ({
+  setLogin,
+}: {
+  setLogin: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
   const [haveAcount, sethaveAcount] = useState<boolean>(true)
+  const auth = useAuth()
+
+  const login = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const target = e.target as typeof e.target & {
+      name: { value: string }
+      email: { value: string }
+      password: { value: string }
+    }
+
+    if (haveAcount === true) {
+      const email = target.email.value
+      const password = target.password.value
+      try {
+        void auth?.signIn(email, password)
+        setLogin(true)
+      } catch (error) {
+        setLogin(false)
+      }
+    } else if (haveAcount === false) {
+      const email = target.email.value
+      const password = target.password.value
+      const name = target.name.value
+      try {
+        void auth?.signUp(email, password, name)
+        sethaveAcount(true)
+      } catch (error) {
+        setLogin(false)
+      }
+    }
+  }
 
   return (
     <main className="flex justify-between min-h-screen">
       <div className="bg-slate-50 flex-[0.5] min-h-screen hidden md:block">
-        <LazyImage src={devmarketLogo} className="w-full h-full object-contain bg-primary" />
+        <LazyImage
+          src={devmarketLogo}
+          className="w-full h-full object-contain bg-primary"
+        />
       </div>
       <div className="bg-white flex justify-center items-center flex-1 md:flex-[0.5] min-h-screen">
         <div className="max-w-[320px] mx-4">
@@ -28,13 +67,17 @@ const Login = ({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
             you're looking for in one place
           </p>
 
-          <form className="flex flex-col mt-8 gap-y-4">
+          <form
+            className="flex flex-col mt-8 gap-y-4"
+            onSubmit={(e) => login(e)}
+          >
             {!haveAcount && (
               <div className="relative w-full">
                 <input
                   placeholder="Pedro Pascal"
                   type="text"
                   className="login-input"
+                  name="name"
                 />
                 <span>
                   <UserIcon className="w-6 h-6 absolute top-2.5 left-3 text-slate-400" />
@@ -46,6 +89,7 @@ const Login = ({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
               <input
                 placeholder="you@example.com"
                 type="email"
+                name="email"
                 className="login-input"
               />
               <span>
@@ -57,6 +101,7 @@ const Login = ({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
               <input
                 placeholder="At least 8 characters"
                 type="password"
+                name="password"
                 className="login-input"
               />
               <span>
@@ -67,7 +112,6 @@ const Login = ({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
             <button
               type="submit"
               className="w-full bg-slate-700 py-3 rounded-lg mt-4 text-white font-semibold hover:bg-slate-800"
-              onClick={() => setLogin(true)}
             >
               {haveAcount ? 'Login' : 'Sign Up'}
             </button>
@@ -78,7 +122,10 @@ const Login = ({ setLogin }: { setLogin: React.Dispatch<React.SetStateAction<boo
               {haveAcount
                 ? 'Don´t you have an account?'
                 : 'Do you already have an account?'}{' '}
-              <span className="font-semibold text-secondary cursor-pointer hover:text-secondary/75" onClick={() => sethaveAcount(prev => !prev)}>
+              <span
+                className="font-semibold text-secondary cursor-pointer hover:text-secondary/75"
+                onClick={() => sethaveAcount((prev) => !prev)}
+              >
                 {haveAcount ? 'Sign Up' : 'Sign In'}
               </span>
             </p>
