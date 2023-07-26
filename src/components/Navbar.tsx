@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { navbarList } from '../constants'
 import {
@@ -10,9 +10,19 @@ import ShopCart from './ShopCart'
 import LazyImage from '../common/LazyImage'
 import devMarket from '../assets/devmarket-icon.svg'
 import { useNavigate } from 'react-router-dom'
+import { useShopCart } from '../hooks/useShopCart'
 
 const Navbar = ({ isLogin }: { isLogin: boolean }) => {
   const [openShopCart, setOpenShopCart] = useState(false)
+  const [shopCartLength, setLenght] = useState<number>(0)
+
+  const shopCart = useShopCart()
+
+  useEffect(() => {
+    if (shopCart?.shopCart?.length) {
+      setLenght(shopCart?.shopCart?.length)
+    }
+  }, [shopCart?.shopCart?.length])
   const navigate = useNavigate()
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -75,10 +85,15 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
             {isLogin && (
               <button
                 type="button"
-                className="rounded-lg flex justify-center items-center w-10 h-10 hover:bg-slate-100"
+                className="rounded-lg flex relative justify-center items-center w-10 h-10 hover:bg-slate-100"
                 onClick={() => setOpenShopCart((prev) => !prev)}
               >
                 <ShoppingCartIcon className="w-5 h-5 absolute text-slate-700" />
+                {shopCartLength > 0 && (
+                  <span className="absolute text-xs bg-rose-600 rounded-full px-1.5 py-0.5 top-0 left-0 text-white font-bold">
+                    {shopCartLength}
+                  </span>
+                )}
               </button>
             )}
 

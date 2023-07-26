@@ -8,3 +8,16 @@ export interface ProductType {
   category?: { name: string }
   brand?: { name: string }
 }
+
+export interface UserType {
+  _id: string
+  name: string
+  email: string
+  role: string
+}
+
+export interface OrderType {
+  _id: string
+  products: ProductType[]
+  user: UserType
+}

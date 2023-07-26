@@ -11,11 +11,13 @@ import { useParams } from 'react-router-dom'
 import { ProductType } from '../types'
 import axios from 'axios'
 import { endpoints } from '../libs/endpoints'
+import { useShopCart } from '../hooks/useShopCart'
 
 const Product = ({ isLogin }: { isLogin: boolean }) => {
   const { id } = useParams()
   const [quantity, setQuantity] = useState<number>(1)
   const [product, setProduct] = useState<ProductType>()
+  const shopCart = useShopCart()
 
   const handlerQuantity = (more: 'more' | 'less') => {
     if (more === 'more') {
@@ -24,6 +26,12 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
       if (quantity > 1) {
         setQuantity((prev) => prev - 1)
       }
+    }
+  }
+
+  const handleAddProduct = () => {
+    if (id && isLogin) {
+      void shopCart?.addProduct(id)
     }
   }
 
@@ -57,7 +65,17 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
             {product?.description || ''}
           </p>
 
-          <h2 className="font-bold text-2xl text-slate-700">${product?.price || ''}</h2>
+          <div className="w-full flex justify-between">
+            <h2 className="font-bold text-2xl text-slate-700">
+              ${product?.price || ''}
+            </h2>
+            <h2 className="font-normal text-md text-slate-500">
+              Stock:{' '}
+              <span className="font-bold text-slate-700">
+                {product?.stock || ''}
+              </span>
+            </h2>
+          </div>
 
           <hr className="border-slate-200" />
 
@@ -88,7 +106,10 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
               />
             </div>
 
-            <button className="rounded-lg bg-slate-700 text-white font-semibold px-4 hover:bg-slate-800">
+            <button
+              className="rounded-lg bg-slate-700 text-white font-semibold px-4 hover:bg-slate-800"
+              onClick={() => handleAddProduct()}
+            >
               Add to Cart
             </button>
           </div>

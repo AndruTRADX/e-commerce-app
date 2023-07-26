@@ -26,5 +26,12 @@ export const endpoints = {
     signIn: `${API}/auth/login`,
     validate: `${API}/auth/profile`,
     signUp: `${API}/users/`
-  }
+  },
+  getOrderByUserId(id: string) {
+    return `${API}/orders/user/${id}`
+  },
+  productToOrder: (id: string, productId: string) => {
+    return `${API}/orders/${id}/product/${productId}`
+  },
+  order: `${API}/orders`
 }

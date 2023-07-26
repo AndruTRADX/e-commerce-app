@@ -1,26 +1,10 @@
+import { useEffect, useState } from 'react'
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import ProductShopCart from './ProductShopCart'
-
-const products = [
-  {
-    _id: 'hisduabdsak',
-    name: 'Nintendo Switch',
-    description: 'Very cool Nintendo console',
-    image: 'https://picsum.photos/400/400/',
-    price: 299,
-    stock: 5,
-  },
-  {
-    _id: 'nasbdhkasdbhk',
-    name: 'Nintendo Switch',
-    description: 'Very cool Nintendo console',
-    image: 'https://picsum.photos/400/400/',
-    price: 299,
-    stock: 5,
-  },
-]
+import { ProductType } from '../types'
+import { useShopCart } from '../hooks/useShopCart'
 
 interface Props {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
@@ -28,6 +12,27 @@ interface Props {
 }
 
 const ShopCart = ({ open, setOpen }: Props) => {
+  const [products, setProducts] = useState<ProductType[]>([])
+  const shopCart = useShopCart()
+
+  useEffect(() => {
+    const getShopCart = () => {
+      setProducts(shopCart?.shopCart || [])
+    }
+
+    void getShopCart()
+  }, [shopCart])
+
+  const calculateTotalPrice = () => {
+    const totalPrice = products.reduce(
+      (total, product) => total + product.price,
+      0,
+    )
+    const priceRounded = Math.ceil(totalPrice)
+    const formattedPrice = priceRounded.toLocaleString()
+    return formattedPrice
+  }
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -80,7 +85,7 @@ const ShopCart = ({ open, setOpen }: Props) => {
                             role="list"
                             className="-my-6 divide-y divide-slate-200"
                           >
-                            {products.map((product, index) => (
+                            {products?.map((product, index) => (
                               <ProductShopCart
                                 product={product}
                                 index={index}
@@ -95,7 +100,7 @@ const ShopCart = ({ open, setOpen }: Props) => {
                     <div className="border-t border-slate-200 px-4 py-6 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-slate-700">
                         <p>Subtotal</p>
-                        <p>$262.00</p>
+                        <p>${calculateTotalPrice()}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-slate-500">
                         Shipping and taxes calculated at checkout.

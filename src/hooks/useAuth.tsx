@@ -9,19 +9,14 @@ import {
 import Cookie from 'js-cookie'
 import axios from 'axios'
 import { endpoints } from '../libs/endpoints'
-
-interface User {
-  name: string
-  email: string
-  role: string
-}
+import { UserType } from '../types'
 
 interface Props {
   children: JSX.Element
 }
 
 export interface AuthState {
-  user?: User
+  user?: UserType
 }
 
 export interface LoginResponse {
@@ -29,7 +24,7 @@ export interface LoginResponse {
 }
 
 interface AppContextInterface {
-  user: User | undefined
+  user: UserType | undefined
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, name: string) => Promise<void>
   signOut: () => void
@@ -42,7 +37,7 @@ export const useAuth = () => {
 }
 
 export const useAuthProvider = () => {
-  const [user, setUser] = useState<User>()
+  const [user, setUser] = useState<UserType>()
 
   const checkToken = useCallback(async () => {
     const token = Cookie.get('token')
@@ -50,11 +45,12 @@ export const useAuthProvider = () => {
       axios.defaults.headers.Authorization = `Bearer ${token}`
       try {
         const res = await axios.get(endpoints.auth.validate)
-        const loggedUser = res.data as User
+        const loggedUser = res.data as UserType
         setUser({
           name: loggedUser.name,
           email: loggedUser.email,
           role: loggedUser.role,
+          _id: loggedUser._id,
         })
       } catch (error) {
         console.error('Error while validating token:', error)

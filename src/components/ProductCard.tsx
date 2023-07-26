@@ -9,9 +9,9 @@ const ProductCard = ({ product }: { product: ProductType }) => {
       to={`/product/${product._id}`}
       onClick={() => window.scrollTo(0, 0)}
     >
-      {/* <span className="absolute top-3 left-3 bg-rose-700 rounded text-sm py-[2px] px-[9px] font-semibold text-white">
+      <span className="absolute top-3 left-3 bg-rose-700 rounded text-sm py-[2px] px-[9px] font-semibold text-white">
         Sale
-      </span> */}
+      </span>
 
       <div className="w-full h-full flex justify-center items-center">
         <LazyImage
