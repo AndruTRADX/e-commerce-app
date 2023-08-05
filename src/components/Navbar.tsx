@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { navbarList } from '../constants'
 import {
   ShoppingCartIcon,
   MagnifyingGlassIcon,
@@ -31,6 +30,10 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
       search: { value: string }
     }
     const search = target.search.value
+    if (!search) {
+      alert('Write first the product, brand or category to search.')
+      return 
+    }
     navigate(`/search/${search}`)
   }
 
@@ -49,22 +52,6 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
               src={devMarket}
             />
           </Link>
-
-          <ul className="gap-8 hidden lg:flex">
-            {navbarList.map((item, index) => (
-              <li
-                className="flex justify-center items-center"
-                key={`navbar-item-${item.content}/${index}`}
-              >
-                <Link
-                  className="text-base font-semibold text-slate-700 hover:underline decoration-slate-500 decoration-2"
-                  to={item.link}
-                >
-                  {item.content}
-                </Link>
-              </li>
-            ))}
-          </ul>
 
           <form
             onSubmit={(e) => handleSubmit(e)}

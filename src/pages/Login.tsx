@@ -24,25 +24,28 @@ const Login = ({
       password: { value: string }
     }
 
+    const email = target.email.value
+    const password = target.password.value
+
     if (haveAcount === true) {
-      const email = target.email.value
-      const password = target.password.value
-      try {
-        void auth?.signIn(email, password)
-        setLogin(true)
-      } catch (error) {
-        setLogin(false)
-      }
+      auth
+        ?.signIn(email, password)
+        .then(() => {
+          setLogin(true)
+        })
+        .catch(() => {
+          alert('User or Password wrong')
+        })
     } else if (haveAcount === false) {
-      const email = target.email.value
-      const password = target.password.value
       const name = target.name.value
-      try {
-        void auth?.signUp(email, password, name)
-        sethaveAcount(true)
-      } catch (error) {
-        setLogin(false)
-      }
+      void auth
+        ?.signUp(email, password, name)
+        .then(() => {
+          sethaveAcount(true)
+        })
+        .catch(() => {
+          alert('Something went wrong')
+        })
     }
   }
 
@@ -67,10 +70,7 @@ const Login = ({
             you're looking for in one place
           </p>
 
-          <form
-            className="flex flex-col mt-8 gap-y-4"
-            onSubmit={(e) => login(e)}
-          >
+          <form className="flex flex-col mt-8 gap-y-4" onSubmit={login}>
             {!haveAcount && (
               <div className="relative w-full">
                 <input

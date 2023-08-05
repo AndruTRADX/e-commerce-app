@@ -70,15 +70,13 @@ export const useAuthProvider = () => {
       },
     }
 
-    try {
-      const res = await axios.post(endpoints.auth.signIn, data, options)
-      const token = res.data as LoginResponse
-      if (token) {
-        Cookie.set('token', token.access_token, { secure: true, expires: 10 })
-      }
-    } catch (error) {
-      console.error('Error while validating token:', error)
+    const res = await axios.post(endpoints.auth.signIn, data, options)
+    const token = res.data as LoginResponse
+    if (token) {
+      Cookie.set('token', token.access_token, { secure: true, expires: 10 })
     }
+
+    void checkToken()
   }
 
   const signUp = async (email: string, password: string, name: string) => {
@@ -93,11 +91,8 @@ export const useAuthProvider = () => {
         'Content-Type': 'application/json',
       },
     }
-    try {
-      await axios.post(endpoints.auth.signUp, data, options)
-    } catch (error) {
-      console.error('Error while validating token:', error)
-    }
+
+    await axios.post(endpoints.auth.signUp, data, options)
   }
 
   const signOut = () => {
