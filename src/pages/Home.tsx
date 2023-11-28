@@ -10,7 +10,7 @@ const Home = ({
   setLogin: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   return (
-    <main className="w-full min-h-screen flex flex-col items-center px-8">
+    <main className="w-full min-h-screen flex flex-col items-center px-8 relative">
       <Navbar isLogin={isLogin} />
       <div className="w-full flex flex-grow min-h-full max-w-screen-xl">
         <AsideLeft isLogin={isLogin} setLogin={setLogin} />

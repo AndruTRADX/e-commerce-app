@@ -5,7 +5,7 @@ import { ProductType } from '../types'
 const ProductCard = ({ product }: { product: ProductType }) => {
   return (
     <Link
-      className="flex flex-col w-full relative border border-slate-200 justify-between rounded-lg p-4 transition-[box-shadow] hover:shadow-xl hover:shadow-slate-200/50"
+      className="flex flex-col w-full relative border border-slate-200 justify-between rounded-lg p-4 transition-[box-shadow] hover:shadow-xl hover:shadow-slate-200/50 min-h-[100px]"
       to={`/product/${product._id}`}
       onClick={() => window.scrollTo(0, 0)}
     >

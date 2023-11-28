@@ -39,7 +39,7 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
 
   return (
     <>
-      <nav className="w-full flex justify-center items-center px-8 fixed backdrop-blur bg-white/75 z-10">
+      <nav className="w-full flex justify-center items-center bg-white z-10">
         <div className="w-full max-w-screen-xl flex justify-between align-center py-4 border-b border-slate-200">
           <Link
             to="/"
@@ -93,8 +93,6 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
           </form>
         </div>
       </nav>
-
-      <div className="w-full h-[72px]" />
 
       <ShopCart open={openShopCart} setOpen={setOpenShopCart} />
     </>

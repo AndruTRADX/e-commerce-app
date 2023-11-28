@@ -1,7 +1,11 @@
 const API = import.meta.env.VITE_API as string
 
 export const endpoints = {
-  getProducts: `${API}/products`,
+  getProducts(limit?: number, offset?: number) {
+    return limit && offset
+      ? `${API}/products?limit=${limit}&offset=${offset}`
+      : `${API}/products`
+  },
   getCategories: `${API}/categories`,
   getBrands: `${API}/brands`,
   getOneProduct(id: string) {
@@ -25,7 +29,7 @@ export const endpoints = {
   auth: {
     signIn: `${API}/auth/login`,
     validate: `${API}/auth/profile`,
-    signUp: `${API}/users/`
+    signUp: `${API}/users/`,
   },
   getOrderByUserId(id: string) {
     return `${API}/orders/user/${id}`
@@ -33,5 +37,5 @@ export const endpoints = {
   productToOrder: (id: string, productId: string) => {
     return `${API}/orders/${id}/product/${productId}`
   },
-  order: `${API}/orders`
+  order: `${API}/orders`,
 }

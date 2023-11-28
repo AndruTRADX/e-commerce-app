@@ -51,7 +51,7 @@ const AsideLeft = ({
   }, [])
 
   return (
-    <aside className="md:w-[260px] xs:w-[220px] h-screen pb-[116px] mt-8 mr-2 hidden xs:block fixed overflow-y-auto">
+    <aside className="md:w-[320px] xs:w-[220px] h-screen mt-8 pb-16 mr-8 hidden xs:block sticky top-8 overflow-y-auto">
       <div className="border border-slate-200 rounded-lg p-4">
         <Disclosure>
           {({ open }) => (
