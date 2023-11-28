@@ -26,16 +26,16 @@ function App() {
         />
         <Route
           path="/search/:query"
-          element={<SearchProducts isLogin={isLogin} />}
+          element={<SearchProducts isLogin={isLogin} setLogin={setIsLogin} />}
         />
         <Route path="/product/:id" element={<Product isLogin={isLogin} />} />
         <Route
           path="/category/:id"
-          element={<SearchByCategory isLogin={isLogin} />}
+          element={<SearchByCategory isLogin={isLogin} setLogin={setIsLogin} />}
         />
         <Route
           path="/brand/:id"
-          element={<SearchByBrand isLogin={isLogin} />}
+          element={<SearchByBrand isLogin={isLogin} setLogin={setIsLogin} />}
         />
         <Route
           path="/login"
