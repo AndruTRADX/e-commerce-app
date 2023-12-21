@@ -33,7 +33,7 @@ const SearchByBrand = ({
 
   return (
     <main className="w-full min-h-screen flex flex-col items-center px-8 relative">
-      <Navbar isLogin={isLogin} />
+      <Navbar isLogin={isLogin} setLogin={setLogin} />
       <div className="w-full flex flex-grow min-h-full max-w-screen-xl">
         <AsideLeft isLogin={isLogin} setLogin={setLogin} />
         <article className="w-full min-h-full flex justify-center items-start my-8">

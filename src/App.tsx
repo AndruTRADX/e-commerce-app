@@ -28,7 +28,7 @@ function App() {
           path="/search/:query"
           element={<SearchProducts isLogin={isLogin} setLogin={setIsLogin} />}
         />
-        <Route path="/product/:id" element={<Product isLogin={isLogin} />} />
+        <Route path="/product/:id" element={<Product isLogin={isLogin} setLogin={setIsLogin} />} />
         <Route
           path="/category/:id"
           element={<SearchByCategory isLogin={isLogin} setLogin={setIsLogin} />}
@@ -40,7 +40,7 @@ function App() {
         <Route
           path="/login"
           element={
-            isLogin ? <Navigate to="/" /> : <Login setLogin={setIsLogin} />
+            isLogin ? <Navigate to="/" /> : <Login isLogin={isLogin} setLogin={setIsLogin} />
           }
         />
         <Route

@@ -14,7 +14,7 @@ const Profile = ({
 
   return (
     <main className="w-full min-h-screen flex flex-col items-center px-8">
-      <Navbar isLogin={isLogin} />
+      <Navbar isLogin={isLogin} setLogin={setLogin} />
       <article className="w-full flex flex-grow min-h-full max-w-screen-xl">
         <div className="w-full flex-col flex justify-start relative">
           <div className="w-full bg-slate-50 h-[130px] border-x border-slate-200" />

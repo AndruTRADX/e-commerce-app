@@ -4,15 +4,26 @@ import {
   ShoppingCartIcon,
   MagnifyingGlassIcon,
   UserIcon,
+  Bars3BottomRightIcon,
 } from '@heroicons/react/24/outline'
 import ShopCart from './ShopCart'
 import LazyImage from '../common/LazyImage'
 import devMarket from '../assets/devmarket-icon.svg'
 import { useNavigate } from 'react-router-dom'
 import { useShopCart } from '../hooks/useShopCart'
+import AsideSearchMobile from './AsideSearchMobile'
 
-const Navbar = ({ isLogin }: { isLogin: boolean }) => {
+const Navbar = ({
+  isLogin,
+  setLogin,
+  absolute,
+}: {
+  isLogin: boolean
+  setLogin: React.Dispatch<React.SetStateAction<boolean>>
+  absolute?: boolean
+}) => {
   const [openShopCart, setOpenShopCart] = useState(false)
+  const [openMobileModal, setOpenMobileModal] = useState(false)
   const [shopCartLength, setLenght] = useState<number>(0)
 
   const shopCart = useShopCart()
@@ -32,15 +43,23 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
     const search = target.search.value
     if (!search) {
       alert('Write first the product, brand or category to search.')
-      return 
+      return
     }
     navigate(`/search/${search}`)
   }
 
   return (
     <>
-      <nav className="w-full flex justify-center items-center bg-white z-10">
-        <div className="w-full max-w-screen-xl flex justify-between align-center py-4 border-b border-slate-200">
+      <nav
+        className={`w-full flex justify-center items-center  z-10 ${
+          absolute ? 'absolute backdrop-blur bg-white/90' : 'bg-white'
+        }`}
+      >
+        <div
+          className={`w-full flex justify-between align-center py-4 border-b border-slate-200 ${
+            absolute ? 'px-8' : 'max-w-screen-xl'
+          }`}
+        >
           <Link
             to="/"
             onClick={() => window.scrollTo(0, 0)}
@@ -53,11 +72,13 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
             />
           </Link>
 
+          {/* ACTIONS FORM */}
           <form
             onSubmit={(e) => handleSubmit(e)}
             className="flex justify-between items-center gap-2"
           >
-            <div className="relative hidden xs:block">
+            {/* SEARCH BAR (Desktop) */}
+            <div className="relative">
               <input
                 type="text"
                 name="search"
@@ -69,10 +90,20 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
               </button>
             </div>
 
+            {/* SEARCHING MENU (Mobile) */}
+            <button
+              type="button"
+              className="rounded-lg flex xs:hidden justify-center border border-transparent items-center w-10 h-10 hover:bg-slate-50 hover:border-slate-300"
+              onClick={() => setOpenMobileModal((prev) => !prev)}
+            >
+              <Bars3BottomRightIcon className="w-5 h-5 absolute text-slate-700" />
+            </button>
+
+            {/* SHOPPING CART BUTTON */}
             {isLogin && (
               <button
                 type="button"
-                className="rounded-lg flex relative justify-center items-center w-10 h-10 hover:bg-slate-100"
+                className="flex rounded-lg relative justify-center border border-transparent items-center w-10 h-10 hover:bg-slate-50 hover:border-slate-300"
                 onClick={() => setOpenShopCart((prev) => !prev)}
               >
                 <ShoppingCartIcon className="w-5 h-5 absolute text-slate-700" />
@@ -86,7 +117,7 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
 
             <Link
               to={isLogin ? '/profile' : '/login'}
-              className="rounded-lg flex justify-center items-center w-10 h-10 hover:bg-slate-100"
+              className="flex rounded-lg  justify-center border border-transparent items-center w-10 h-10 hover:bg-slate-50 hover:border-slate-300"
             >
               <UserIcon className="w-5 h-5 absolute text-slate-700" />
             </Link>
@@ -95,6 +126,12 @@ const Navbar = ({ isLogin }: { isLogin: boolean }) => {
       </nav>
 
       <ShopCart open={openShopCart} setOpen={setOpenShopCart} />
+      <AsideSearchMobile
+        open={openMobileModal}
+        setOpen={setOpenMobileModal}
+        isLogin={isLogin}
+        setLogin={setLogin}
+      />
     </>
   )
 }

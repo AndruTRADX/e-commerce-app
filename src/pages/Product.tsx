@@ -9,7 +9,13 @@ import { endpoints } from '../libs/endpoints'
 import { useShopCart } from '../hooks/useShopCart'
 import Modal from '../common/Modal'
 
-const Product = ({ isLogin }: { isLogin: boolean }) => {
+const Product = ({
+  isLogin,
+  setLogin,
+}: {
+  isLogin: boolean
+  setLogin: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
   const { id } = useParams()
   // const [quantity, setQuantity] = useState<number>(1)
   const [product, setProduct] = useState<ProductType>()
@@ -44,7 +50,7 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
   return (
     <>
       <div className="w-full min-h-screen flex flex-col items-center px-8">
-        <Navbar isLogin={isLogin} />
+        <Navbar isLogin={isLogin} setLogin={setLogin} />
         <div className="w-full flex items-center md:items-stretch flex-col-reverse md:flex-row flex-grow min-h-full max-w-screen-xl">
           <div className="flex flex-[0.5] py-12 md:mr-6">
             <div className="w-full h-min flex justify-center items-center border border-slate-200 p-4 rounded-lg">
@@ -118,7 +124,7 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
       </div>
 
       <Modal open={open} setOpen={setOpen}>
-      <div className="flex flex-col items-center gap-y-8">
+        <div className="flex flex-col items-center gap-y-8">
           <h2 className="text-slate-500 text-lg">
             To add a product to the cart you need to log in
           </h2>
@@ -129,7 +135,10 @@ const Product = ({ isLogin }: { isLogin: boolean }) => {
             >
               Log in
             </Link>
-            <button onClick={() => setOpen(prev => !prev)} className="rounded-lg text-slate-700 font-semibold border border-slate-300 hover:bg-slate-50 py-2.5 px-4 select-none gap-2">
+            <button
+              onClick={() => setOpen((prev) => !prev)}
+              className="rounded-lg text-slate-700 font-semibold border border-slate-300 hover:bg-slate-50 py-2.5 px-4 select-none gap-2"
+            >
               Cancel
             </button>
           </div>

@@ -6,6 +6,7 @@ import axios from 'axios'
 import { endpoints } from '../libs/endpoints'
 import ProductCard from '../components/ProductCard'
 import AsideLeft from '../components/AsideLeft'
+import NotFound from '../common/NotFound'
 
 const SearchProduct = ({
   isLogin,
@@ -35,15 +36,19 @@ const SearchProduct = ({
 
   return (
     <main className="w-full min-h-screen flex flex-col items-center px-8 relative">
-      <Navbar isLogin={isLogin} />
+      <Navbar isLogin={isLogin} setLogin={setLogin} />
       <div className="w-full flex flex-grow min-h-full max-w-screen-xl">
         <AsideLeft isLogin={isLogin} setLogin={setLogin} />
         <article className="w-full min-h-full flex justify-center items-start my-8">
-          <div className="w-full grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
-            {products.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
+          {products.length === 0 ? (
+            <NotFound />
+          ) : (
+            <div className="w-full grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+              {products.map((product) => (
+                <ProductCard key={product._id} product={product} />
+              ))}
+            </div>
+          )}
         </article>
       </div>
     </main>
