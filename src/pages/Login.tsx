@@ -54,7 +54,7 @@ const Login = ({
 
   return (
     <div className='relative'>
-      <Navbar isLogin={isLogin} setLogin={setLogin} isAbsolute />
+      <Navbar isLogin={isLogin} setLogin={setLogin} absolute />
       <main className="flex justify-between ">
         <div className="bg-slate-50 flex-[0.5] min-h-screen hidden md:block">
           <LazyImage
